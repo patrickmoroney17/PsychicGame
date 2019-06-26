@@ -4,15 +4,13 @@ var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l
 var wins = 0;
 var losses = 0;
 var guessCount = 0;
-var guessLeftCount = 9;
-var guessSoFar = [];
 
 // Create variables that hold references to the places in the HTML where we want to display things.
 var userChoiceText = document.getElementById('userchoice-text');
 var computerChoiceText = document.getElementById('computerchoice-text');
 var winsText = document.getElementById('wins-text');
 var lossesText = document.getElementById('losses-text');
-// var guessesText = document.getElementById('guesses-text');
+var guessesText = document.getElementById('guesses-text');
 
 for (i = 0; i < 9; i++) {
 
@@ -21,20 +19,17 @@ for (i = 0; i < 9; i++) {
     document.onkeyup = function(event) {
     var userGuess = event.key;
 
-    // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate number
     if (userGuess === computerGuess) {
-        wins++;
+            wins++;
         } else {
-            losses++;
             guessCount++;
         }
 
-        // Display the user and computer guesses, and wins/losses/ties.
         userChoiceText.textContent = 'You chose: ' + userGuess;
         computerChoiceText.textContent = 'The computer chose: ' + computerGuess;
         winsText.textContent = 'wins: ' + wins;
         lossesText.textContent = 'losses: ' + losses;
-        // guessesText.textContent = 'Guess Count: ' + guessCount;
+        guessesText.textContent = 'Guess Count: ' + guessCount;
     }
 };
 
@@ -44,7 +39,6 @@ for (i = 0; i < 9; i++) {
 // var losses = 0;
 // var guessCount = 0;
 // var guessLeftCount = 9;
-// var guessSoFar = [];
 
 // var userChoiceText = document.getElementById('userchoice-text');
 // var computerChoiceText = document.getElementById('computerchoice-text');
@@ -58,10 +52,8 @@ for (i = 0; i < 9; i++) {
 //     var computerChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
 //     document.onkeyup = function(event) {
-//         // Determines which key was pressed.
 //         var userGuess = event.key;
     
-//         // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate number
 //         if (userGuess === computerChoice) {
 //             wins++;
 //         } else {
@@ -69,7 +61,6 @@ for (i = 0; i < 9; i++) {
 //             guessLeftCount--;
 //         }
 
-//         // Display the user and computer guesses, and wins/losses/ties.
 //         userChoiceText.textContent = 'You chose: ' + userGuess;
 //         computerChoiceText.textContent = 'The computer chose: ' + computerGuess;
 //         winsText.textContent = 'Wins: ' + wins;
