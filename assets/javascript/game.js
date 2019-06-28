@@ -15,12 +15,33 @@ var remainingGuessesText = document.getElementById("remainingGuesses-text");
 document.onkeyup = function(event) {
   var userChoice = event.key;
 
+  // code from internet
+  var regexp = /[a-z]/gi;
+  if (!regexp.test(userChoice)) {
+    alert("please enter a letter");
+  }
+
+  if (remainingGuesses <= 0) {
+
+    alert("You lost!");
+    losses++;
+    remainingGuesses = 9;
+    guessedLetters = [];
+    remainingGuessesText.textContent = "Guess left: 9" + remainingGuesses;
+
+    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    console.log(computerGuess);
+
+  }
+
   if (userChoice === computerGuess) {
 
     alert("You won!");
     wins++;
     guessedLetters = [];
     remainingGuesses = 9;
+
+    remainingGuessesText.textContent = "Guess left: " + remainingGuesses;
     computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
     console.log(computerGuess);
 
@@ -30,19 +51,7 @@ document.onkeyup = function(event) {
     document.getElementById("guessedLetters-text").innerHTML = guessedLetters;
   }
 
-  if (remainingGuesses <= 0) {
-
-    alert("You lost!");
-    losses++;
-    remainingGuesses = 9;
-    guessedLetters = [];
-
-    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-    console.log(computerGuess);
-
-  }
-
-    winsText.textContent = wins;
-    lossesText.textContent = losses;
-    remainingGuessesText.textContent = remainingGuesses;
+    winsText.textContent = "Wins: " + wins;
+    lossesText.textContent = "Losses: " + losses;
+    remainingGuessesText.textContent = "Guesses left: " + remainingGuesses;
   }
