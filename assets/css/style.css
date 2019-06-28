@@ -1,8 +1,13 @@
-body {
-    Margin: 0 auto;
+.header {
+  text-align: center;
+  padding: 15px;
 }
 
 h1 {
-    font-size: 25px;
-    margin: 20px 0px 20px 0px;
+  font-size: 40px;
+  font-weight: bold;
 }
+h3 {
+  font-weight: bold;
+}
+
