@@ -15,20 +15,20 @@ var remainingGuessesText = document.getElementById("remainingGuesses-text");
 document.onkeyup = function(event) {
   var userChoice = event.key;
 
-  // code from internet
+  // code from internet - makes sure the user selects a value a-z
   var regexp = /[a-z]/gi;
   if (!regexp.test(userChoice)) {
     alert("please enter a letter");
   }
 
-  if (remainingGuesses <= 0) {
+  if (remainingGuesses < 0) {
 
-    alert("You lost!");
+    // alert("You lost!");
     losses++;
     remainingGuesses = 9;
     guessedLetters = [];
-    remainingGuessesText.textContent = "Guess left: 9" + remainingGuesses;
 
+    remainingGuessesText.textContent = "Guesses left: 9";
     computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
     console.log(computerGuess);
 
@@ -36,12 +36,12 @@ document.onkeyup = function(event) {
 
   if (userChoice === computerGuess) {
 
-    alert("You won!");
+    // alert("You won!");
     wins++;
     guessedLetters = [];
     remainingGuesses = 9;
 
-    remainingGuessesText.textContent = "Guess left: " + remainingGuesses;
+    remainingGuessesText.textContent = "Guesses left: 9";
     computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
     console.log(computerGuess);
 
