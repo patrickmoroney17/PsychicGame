@@ -1,19 +1,16 @@
 var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-
-alert("the computer choses " + computerGuess);
+console.log(computerGuess);
 
 var wins = 0;
 var losses = 0;
 var remainingGuesses = 9;
 var guessedLetters = [];
 
-var userChoiceText = document.getElementById("userchoice-text");
 var winsText = document.getElementById("wins-text");
 var lossesText = document.getElementById("losses-text");
 var remainingGuessesText = document.getElementById("remainingGuesses-text");
-// var guessedLettersText = document.getElementById("guessedLetters-Text");
 
 document.onkeyup = function(event) {
   var userChoice = event.key;
@@ -25,11 +22,12 @@ document.onkeyup = function(event) {
     guessedLetters = [];
     remainingGuesses = 9;
     computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-    alert("the computer choses " + computerGuess);
+    console.log(computerGuess);
 
   } else {
     remainingGuesses--;
     guessedLetters.push(userChoice);
+    document.getElementById("guessedLetters-text").innerHTML = guessedLetters;
   }
 
   if (remainingGuesses <= 0) {
@@ -40,14 +38,11 @@ document.onkeyup = function(event) {
     guessedLetters = [];
 
     computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-    alert("the computer choses " + computerGuess);
+    console.log(computerGuess);
+
   }
 
-
-    userChoiceText.textContent = "You chose: " + userChoice;
     winsText.textContent = wins;
     lossesText.textContent = losses;
     remainingGuessesText.textContent = remainingGuesses;
-    // guessedLettersText.textContent = guessedLetters;
-
   }
