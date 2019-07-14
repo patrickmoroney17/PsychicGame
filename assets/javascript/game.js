@@ -1,57 +1,64 @@
 var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
-var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-console.log(computerGuess);
+var computerChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+console.log(computerChoice);
 
 var wins = 0;
 var losses = 0;
-var remainingGuesses = 9;
+var guessesRemaining = 9;
 var guessedLetters = [];
+// var computerChoice = computerChoice;
+// var letters = "qwertyuiopasdfghjklzxcvbnm"
 
-var winsText = document.getElementById("wins-text");
-var lossesText = document.getElementById("losses-text");
-var remainingGuessesText = document.getElementById("remainingGuesses-text");
+function jsGuess() {
+  computerChoices[Math.floor(Math.random() * computerChoices.length)];
+  console.log(computerChoice);
+}
 
-document.onkeyup = function(event) {
-  var userChoice = event.key;
 
-  // code from internet - makes sure the user selects a value a-z
-  var regexp = /[a-z]/gi;
-  if (!regexp.test(userChoice)) {
-    alert("please enter a letter");
-  }
+document.onkeyup = function (event) {
+      var userGuess = event.key;
+      console.log(userGuess);
 
-  if (remainingGuesses < 0) {
+      // HANDELING CORRECT GUESSES
+      //test if players guess equals computerChoice, if true it increments wins by 1, and clears used letters array. Supposed to reset guess # to 10 but starts at 9 instead, 
+      if (userGuess === computerChoice) {
+            wins++;
+            guessesRemaining = 10;
+            guessedLetters = [];
 
-    // alert("You lost!");
-    losses++;
-    remainingGuesses = 9;
-    guessedLetters = [];
+      }
 
-    remainingGuessesText.textContent = "Guesses left: 9";
-    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-    console.log(computerGuess);
+      //HANDELING INCORRECT GUESSES
+      //tests if players guess Does Not Equal computerChoice and decriments guessesRemaining by 1
+      jsGuess();
+      if (userGuess !== computerChoice) {
+            guessesRemaining--;
 
-  }
+      }
 
-  if (userChoice === computerGuess) {
+      //when remaining guessesRemaining equals zero, losses is incrimented by 1; guessesRemaining is reset to 10, and used letters array is cleared
+      if (guessesRemaining == 0) {
+            losses++;
+            guessedLetters = []
+            guessesRemaining = 10;
+      }
 
-    // alert("You won!");
-    wins++;
-    guessedLetters = [];
-    remainingGuesses = 9;
+      //HANDELING INCORRECT GUESSES - OUTPUT
+      //this 'if' prevents a letter selected a 2nd time from being written to the guessedLetters again, although it still counts as a guess
+      if (guessedLetters.indexOf(userGuess) >= 0) {
 
-    remainingGuessesText.textContent = "Guesses left: 9";
-    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-    console.log(computerGuess);
+      } else {
+            //this pushes the players incorrect guess to the guessedLetters and writes it to the HTML
+            guessedLetters.push(userGuess);
+            $(".userGuesses-text").text(guessedLetters);
+            console.log(guessedLetters);
 
-  } else {
-    remainingGuesses--;
-    guessedLetters.push(userChoice);
-    document.getElementById("guessedLetters-text").innerHTML = guessedLetters;
-  }
+      }
+      //OUTPUT TO HTML
+      //these statements write the values/scores generated to the HTML
+      $(".wins-text").text(wins);
+      $(".losses-text").text(losses);
+      $(".guessesRemaining-text").text(guessesRemaining);
 
-    winsText.textContent = "Wins: " + wins;
-    lossesText.textContent = "Losses: " + losses;
-    remainingGuessesText.textContent = "Guesses left: " + remainingGuesses;
-  }
+}
